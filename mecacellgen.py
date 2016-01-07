@@ -35,36 +35,36 @@ with t.cd(args.name):
     mkdir('bin')
     mkdir('build')
     mkdir('src')
-    mkdir('src/console')
-    mkdir('src/viewer')
-    mkdir('src/main')
+    mkdir('src/core')
     t.OK()
     tmplScenario = t.queryYN(
         'Do you want your scenario to be a class template (with cell type as parameter)?', 'no')
     print 'Name of your scenario class? [default = "Scenario"]',
     scName = raw_input()
-    print 'Name of your cell class? [default = "Cell"]',
-    cellName = raw_input()
     if not scName:
         scName = 'Scenario'
+    print 'Name of your cell class? [default = "Cell"]',
+    cellName = raw_input()
+    if not cellName:
+        cellName = 'Cell'
     sys.stdout.write(' * generating base source files')
-    with open("src/console/mainconsole.cpp", "wb") as fh:
+    with open("src/mainconsole.cpp", "wb") as fh:
             fh.write(env.get_template('mainconsole.cpp').render(
                 tmplScenario=tmplScenario, Scenario=scName, Cell=cellName))
-    with open("src/main/" + cellName.lower() + ".h", "wb") as fh:
+    with open("src/core/" + cellName.lower() + ".h", "wb") as fh:
             fh.write(env.get_template('cell.h').render(Cell=cellName))
-    with open("src/main/" + cellName.lower() + ".cpp", "wb") as fh:
+    with open("src/core/" + cellName.lower() + ".cpp", "wb") as fh:
             fh.write(env.get_template('cell.cpp').render(Cell=cellName))
 
     if tmplScenario:
-        with open("src/main/" + scName.lower() + ".hpp", "wb") as fh:
+        with open("src/core/" + scName.lower() + ".hpp", "wb") as fh:
             fh.write(env.get_template('scenario.hpp').render(
                 Scenario=scName, Cell=cellName))
     else:
-        with open("src/main/" + scName.lower() + ".h", "wb") as fh:
+        with open("src/core/" + scName.lower() + ".h", "wb") as fh:
             fh.write(env.get_template('scenario.h').render(
                 Scenario=scName, Cell=cellName))
-        with open("src/main/" + scName.lower() + ".cpp", "wb") as fh:
+        with open("src/core/" + scName.lower() + ".cpp", "wb") as fh:
             fh.write(env.get_template('scenario.cpp').render(
                 Scenario=scName, Cell=cellName))
     t.OK()

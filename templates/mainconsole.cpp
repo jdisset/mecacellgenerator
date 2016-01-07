@@ -1,10 +1,10 @@
 #include <mecacell/mecacell.h>
 {%- if tmplScenario %}
-#include "main/{{ Scenario.lower() }}.hpp"
+#include "core/{{ Scenario.lower() }}.hpp"
 {%- else %}
-#include "main/{{ Scenario.lower() }}.h"
+#include "core/{{ Scenario.lower() }}.h"
 {%- endif %}
-#include "main/{{ Cell.lower() }}.h"
+#include "core/{{ Cell.lower() }}.h"
 
 int main(int argc, char *argv[]) {
 {%- if tmplScenario %}
