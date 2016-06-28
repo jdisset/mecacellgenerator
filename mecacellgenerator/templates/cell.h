@@ -6,7 +6,7 @@
 class {{ Cell }} : public MecaCell::ConnectableCell<{{ Cell }}> {
 	using Base = MecaCell::ConnectableCell<{{ Cell }}>; 
 	public:
-	Cell(const MecaCell::Vec& p) : Base(p){}
+	{{ Cell }} (const MecaCell::Vec& p) : Base(p){}
 	double getAdhesionWith(const {{ Cell }}*, const MecaCell::Vec&) const;
 	{{ Cell }}* updateBehavior(double dt);
 };
